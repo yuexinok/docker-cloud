@@ -25,18 +25,17 @@ sql_mode = NO_ENGINE_SUBSTITUTION,NO_AUTO_CREATE_USER
 ```shell
 #进入mysql目录：docker-compose up -d
 ➜  mysql git:(master) ✗ docker-compose up -d
-Creating network "mysql_docker-cloud" with driver "bridge"
-Creating mysql_mysql-3307_1 ... done
-Creating mysql_mysql-3306_1 ... done
-Creating mysql_mysql-3308_1 ... done
-
-#查看
+Creating network "mysql_default" with the default driver
+Creating mysql_3308 ... done
+Creating mysql_3306 ... done
+Creating mysql_3307 ... done
+#查看运行态
 ➜  mysql git:(master) ✗ docker-compose ps
-       Name                    Command             State           Ports
----------------------------------------------------------------------------------
-mysql_mysql_3306_1   docker-entrypoint.sh mysqld   Up      0.0.0.0:3306->3306/tcp
-mysql_mysql_3307_1   docker-entrypoint.sh mysqld   Up      0.0.0.0:3307->3306/tcp
-mysql_mysql_3308_1   docker-entrypoint.sh mysqld   Up      0.0.0.0:3308->3306/tcp
+   Name                Command             State           Ports
+-------------------------------------------------------------------------
+mysql_3306   docker-entrypoint.sh mysqld   Up      0.0.0.0:3306->3306/tcp
+mysql_3307   docker-entrypoint.sh mysqld   Up      0.0.0.0:3307->3306/tcp
+mysql_3308   docker-entrypoint.sh mysqld   Up      0.0.0.0:3308->3306/tcp
 ```
 
 连接密码：-u root -p 123456
@@ -54,6 +53,16 @@ slaveof redis_master 6379
 ```
 
 ```shell
+➜  redis git:(master) docker-compose up -d
+Creating network "redis_redis" with driver "bridge"
+Creating redis_master ... done
+Creating redis_slave  ... done
+➜  redis git:(master) docker-compose ps
+    Name                  Command               State           Ports
+------------------------------------------------------------------------------
+redis_master   docker-entrypoint.sh redis ...   Up      0.0.0.0:6379->6379/tcp
+redis_slave    docker-entrypoint.sh redis ...   Up      0.0.0.0:7000->6379/tcp
+
 ➜  redis git:(master) ✗ redis-cli
 127.0.0.1:6379> info
 # Server
