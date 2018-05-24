@@ -1,0 +1,26 @@
+version: '2.0'
+services:
+  redis_master:
+    container_name: redis_master
+    image: redis
+    ports:
+      - 6379:6379
+    networks:
+      - redis
+
+  redis_slave:
+    container_name: redis_slave
+    image: redis
+    ports:
+      - 7000:6379
+    volumes:
+      - ./redis-slave.conf:/data/redis.conf
+    links:
+      - redis_master
+    command: redis-server /data/redis.conf
+    networks:
+      - redis
+
+networks:
+  redis:
+    driver: bridge

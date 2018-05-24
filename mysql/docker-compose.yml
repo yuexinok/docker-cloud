@@ -1,0 +1,31 @@
+version: '2.0'
+services:
+  mysql_3306:
+    container_name: mysql_3306
+    image: mariadb
+    ports:
+      - 3306:3306
+    environment: 
+      MYSQL_ROOT_PASSWORD: 123456
+    volumes:
+      - ./my.cnf:/etc/mysql/my.cnf
+
+  mysql_3307:
+    container_name: mysql_3307
+    image: mariadb
+    ports:
+      - 3307:3306
+    environment: 
+      MYSQL_ROOT_PASSWORD: 123456
+    volumes:
+     - ./my.cnf:/etc/mysql/my.cnf
+
+  mysql_3308:
+    container_name: mysql_3308
+    image: mariadb
+    ports:
+      - 3308:3306
+    environment: 
+      MYSQL_ROOT_PASSWORD: 123456
+    volumes:
+      - ./my.cnf:/etc/mysql/my.cnf

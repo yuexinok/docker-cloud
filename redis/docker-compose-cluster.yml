@@ -1,0 +1,29 @@
+version: '2.0'
+services:
+  redis_7000:
+    container_name: redis_7000
+    image: redis
+    ports:
+      - 7000:7000
+    volumes:
+      - ./7000/redis.conf:/data/redis.conf
+    command: redis-server /data/redis.conf
+    networks:
+      - redis
+
+  redis_7001:
+    container_name: redis_7001
+    image: redis
+    ports:
+      - 7001:7001
+    volumes:
+      - ./7001/redis.conf:/data/redis.conf
+    links:
+      - redis_7000
+    command: redis-server /data/redis.conf
+    networks:
+      - redis
+
+networks:
+  redis:
+    driver: bridge
